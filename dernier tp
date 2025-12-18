@@ -1,0 +1,19 @@
+def nearest_neighbor_tsp_v2(dist_matrix, start=0):
+    n = len(dist_matrix)
+    unvisited = set(range(n))
+    path = [start]
+    unvisited.remove(start)
+    total_dist = 0
+    current = start
+
+    while unvisited:
+        # اختيار أقرب مدينة من المدن الغير مزارة
+        next_city = min(unvisited, key=lambda city: dist_matrix[current][city])
+        total_dist += dist_matrix[current][next_city]
+        path.append(next_city)
+        unvisited.remove(next_city)
+        current = next_city
+
+    # العودة للبداية
+    total_dist += dist_matrix[current][start]
+    return path, total_dis
